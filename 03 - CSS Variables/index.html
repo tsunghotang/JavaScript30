@@ -16,6 +16,12 @@
 
     <label for="base">Base Color</label>
     <input id="base" type="color" name="base" value="#ffc600">
+
+    <label for="width">Image Width</label>
+    <input id="width" type="range" name="width" min="100" max="600" value="100" data-sizing="px">
+
+    <label for="border-radius">Border Radius</label>
+    <input id="border-radius" type="range" name="border-radius" min="0" max="30" value="0" data-sizing="px">
   </div>
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
@@ -26,6 +32,8 @@
       --base: #ffc600;
       --spacing: 10px;
       --blur: 10px;
+      --width: 100px;
+      --border-radius: 0px;
     }
 
     body {
@@ -39,6 +47,11 @@
 
     .controls {
       margin-bottom: 50px;
+      display: flex;
+      flex-flow: wrap;
+      justify-content: center;
+      align-items: center;;
+      gap: 30px;
     }
 
     input {
@@ -49,6 +62,8 @@
       padding: var(--spacing);
       background: var(--base);
       filter: blur(var(--blur));
+      width: var(--width);
+      border-radius: var(--border-radius);
     }
 
     .hl {
