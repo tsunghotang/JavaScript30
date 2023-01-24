@@ -13,6 +13,7 @@ const handleUpdate = ({currentTarget}) => {
 //   document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
 // }
 
+// add eventListener to inputs
 inputs.forEach(input => {
   input.addEventListener('change', handleUpdate)
   input.addEventListener('mousemove', handleUpdate)
