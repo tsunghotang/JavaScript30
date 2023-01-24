@@ -112,25 +112,27 @@ Each variable is linked to an input with `blur` and `spacing` containing a `data
 
 1. Assign CSS variables to an element
 
-```css
-:root {
-  --base: #ffc600;
-  --spacing: 10px;
-  --blur: 10px;
-}
-```
+   ```css
+   :root {
+     --base: #ffc600;
+     --spacing: 10px;
+     --blur: 10px;
+   }
+   ```
+
+   
 
 2. Reference the variables within an element 
 
-```css
-img {
-	background: var(--base);
-	padding: var(--spacing);
-  filter: blur(var(--blur))
-}
-```
+   ```css
+   img {
+     background: var(--base);
+     padding: var(--spacing);
+     filter: blur(var(--blur))
+   }
+   ```
 
-
+   
 
 3. Select all three inputs 
 
@@ -142,29 +144,35 @@ img {
 
 4. Add an eventListener to the selected elements 
 
-```javascript
-inputs.forEach(input => {
-  input.addEventListener('change', handleUpdate)
-  input.addEventListener('mousemove', handleUpdate)
-})
-```
+   ```javascript
+   inputs.forEach(input => {
+     input.addEventListener('change', handleUpdate)
+     input.addEventListener('mousemove', handleUpdate)
+   })
+   ```
 
-
+   
 
 5. Define `handleUpdate` cb method 
 
    * Get the `name` attribute of the input that triggered the event
+
    * Get the `value` attribute of the input that triggered the event 
+
    * Format the value to include the `px` suffix if the input that triggered the event has the `data-sizing`attribute
+
    * Grab the :root element which contains the variables `document.documentElement`
+
      * call `setProperty()` passing in the `name` and `value+suffix` to change the value of the variable
 
-   ```javascript
-   function handleUpdate(){
-   	const suffix = this.dataset.sizing || '';
-   	document.documentElement.style.setProperty(`--${this.name}`, `${this.value}${suffix}`)
-   }
-   ```
+       ```javascript
+       function handleUpdate(){
+       	const suffix = this.dataset.sizing || '';
+       	document.documentElement.style.setProperty(`--${this.name}`, `${this.value}${suffix}`)
+       }
+       ```
+
+       
 
    
 
