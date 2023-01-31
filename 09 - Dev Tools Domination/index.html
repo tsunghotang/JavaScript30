@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+  // Figure out what line of code is causing somehting to happen (JavaScript)
+    // 1. inspect the element
+    // 2. Right click the element in the 'Elements' tabs
+    // 3. Break on > attribute modifications
+
+
+
+    // console methods
+    // Regular
+    console.log('hello');
+
+    // Interpolated
+    // Interpolate values into .log
+    const el = '<p>'
+    console.log('Hello I am a %s string!', '💩');
+    console.log(`Hello I am a ${el} string!`);
+
+    // Styled
+    // Style console.log output
+      // by using '%c' we can then pass log another argument with css styles
+      // console.log('%c I am some great text', 'font-size:50px; background:red; text-shadow: 10px 10px 0 blue')
+
+    // warning!
+    // display warning message in the console
+    console.warn('OH NOOO');
+
+    // Error :|
+    // Display error message in the console
+    console.error('Shit!');
+
+    // Info
+    console.info('Crocodiles eat 3-4 people per year');
+
+    // Testing
+    // Only outputs if the assertion is wrong
+    const p = document.querySelector('p');
+
+    console.assert(p.classList.contains('ouch'), 'That is wrong!');
+
+    // clearing
+    console.clear();
+
+    // Viewing DOM Elements
+      // displays the available methods and properties on the element passed in
+
+    console.log(p);
+    console.dir(p);
+
+    console.clear();
+
+    // Grouping together
+    // group
+    // grouoCollapsed
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    // counting
+    // counts how many times you use a specific word or number object or dom element
+
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+
+    // timing
+    // Allows us to see how long something takes
+    // we pass timeEnd the same string we used to start it
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      });
+
+    // Table
+    // Can be used when we have an array of objects
+      console.table(dogs);
+
+  </script>
+</body>
+</html>
