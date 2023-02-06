@@ -1,12 +1,14 @@
-# Drum Kit
-Each key is mapped to a sound effect. When the user hits or clicks a key a short animation will appear and a sound effect will play.
+# Drum Kit
 
-We achieve this with
+Each key is mapped to a sound effect. When the user hits or clicks a key, a short animation will appear and a sound effect will play.
+
+We achieve this with:
  * **Event Liseners** - whenever the user presses or clicks a key we apply a CSS class to the element corresponding to the element/key pressed and play an audio. This CSS class will execute the animation.
 
  * **The HTML data attribute** - We assign each key element to its corresponding codeKey and bind an audio file to that keyCode.
 
- ## Key Takeaways
+## Key Takeaways
+
 * Every key on our keyboard has a corresponding keycode associated with it.
 
 * **Data attribute** are used to store HTML on custom data. we can use `dataset.*` to access the data stored on the HTML element.
@@ -46,7 +48,7 @@ We achieve this with
   </p>
   ```
 
-* classList 
+* `classList` 
 
   ```javascript
   key.classList.add('playing');
@@ -54,7 +56,12 @@ We achieve this with
   key.classList.append('playing');
   ```
 
-  
+
+
+
+## Pseudocode
+
+
 
 ## Solution
 
@@ -89,8 +96,4 @@ keys.forEach(key => {
 window.addEventListener('keydown', playSound);
 
 ```
-
-## Todo
-
-* Finish update/write up solution notes.
 
