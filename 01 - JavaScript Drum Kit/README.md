@@ -9,7 +9,7 @@ We achieve this with:
 
 ## Key Takeaways
 
-* Every key on our keyboard has a corresponding **keycode** associated with it.
+* Every key on our keyboard has a corresponding **key-code** associated with it.
 
 * **Data attribute** are used to store custom data on HTML elements. we can use `dataset.*` method to access the data stored on the HTML element.
 
@@ -133,21 +133,21 @@ The `playing` class will scale the elements inside and add a border colour and b
 
 
 
-The `data-key` attribute is used to link a soundfile to a specific key. Each key on the keyboard has a specific `key code`  which we can retrieve from the `event` object. This allows us to trigger a certain sound when a specific key is hit.
+The `data-key` attribute is used to link a sound file to a specific key. Each key on the keyboard has a specific `key code`  which we can retrieve from the `event` object. This allows us to trigger a certain sound when a specific key is hit.
 
 
 
 1. Select all elements with the class of `key`.
 2. Hook all elements with the class of `key` to an `eventListener` that listens for the `keydown` event.
-3. Define the callback function that tirggers when the event happens
+3. Define the callback function for the `keydown` event listener
    1. Play sound
-      * Retrieve the keycode of the key that triggered the event
-        * Select the audio element with the same data-key as the keycode
+      * Retrieve the key-code of the key that triggered the event
+        * Select the audio element with the same data-key as the key-code
           * IF there is no audio element with the matching code do nothing
-          * IF there is a matching audio file then play the aduio
+          * IF there is a matching audio file then play the audio
    2. Add animation
-      * Retrieve the keycode of the key that triggered the event
-        * Select the element with the `data-key` matching the keycode that triggered the event
+      * Retrieve the key-code of the key that triggered the event
+        * Select the element with the `data-key` matching the key-code that triggered the event
         * add/toggle the class `playing` on the element
    3. Remove animation
       * Define an event listener that looks for the `transitionend` event
@@ -162,7 +162,7 @@ The `data-key` attribute is used to link a soundfile to a specific key. Each key
 
 ## Solution
 
-Addional Functionality
+Additional Functionality:
 
 * Implemented click functionality
 * Fixed animation bug where holding down a key would not remove the `.playing` class
