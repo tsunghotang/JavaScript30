@@ -3,9 +3,9 @@
 Each key is mapped to a sound effect. When the user hits or clicks a key, a short animation will appear and a sound effect will play.
 
 We achieve this with:
- * **Event Listeners** - whenever the user presses or clicks a key we apply a CSS class to the element corresponding to the element/key pressed and play an audio. This CSS class will execute the animation.
+ * **Event Listeners** - whenever the user presses or clicks a key, we apply a CSS class to the element corresponding to the element/key pressed and play an audio. This CSS class will execute the animation.
 
- * **The HTML data attribute** - We assign each key element to its corresponding codeKey and bind an audio file to that keyCode.
+ * **The HTML data attribute** - we assign each element with a class of `key` to its corresponding codeKey and bind an audio file to that keyCode.
 
 ## Key Takeaways
 
@@ -124,11 +124,10 @@ The `playing` class will scale the elements inside and add a border colour and b
 
 
 
-* `div` elements with the class of `keys` acts as the container
-
-  * Within the `keys` container we have 9 `key` contains that represent a key on the keyboard.
+* The `div` element with the class of `keys` acts as the container element
+  * Within the `keys` container we have 9 elements with the class of `key` that represent a key on the keyboard.
     * Each key has a `data-key` attribute assigned to it, a `<kdb>`, and a `span` element which describes the sound the key makes
-
+  
 * Nine `audio` elements with a `data-key` attribute and the `src` for the sound.
 
 
@@ -155,7 +154,7 @@ The `data-key` attribute is used to link a sound file to a specific key. Each ke
       * Look for the specific `propertyName` of `transform`
         * IF it is present then remove the `playing` class from the element
 
-#### Edge Cases
+#### Bugs and Edge cases
 
 * Audio needs to be set to 0 to ensure that the sound plays even if we hit a key before it finishes playing. - `  audio.currentTime = 0;`
 * Using `toggle` instead of `add` fixes a bug where the `playing` class is not correctly removed
