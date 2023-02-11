@@ -1,25 +1,34 @@
 # Playing with CSS Variables and JS
 
+Dynamicially style elements by using JavaScript to manipulate **CSS variables** referenced by elements on the page.
 
+We achieve this by:
 
-This exercise involes updating CSS variables with JavaScript.
+1. Setting custom properties on the `:root` element. This allows us to access them globally. For example, `--main-color: red`
 
-1. We declare CSS variables on an element - `--varName: value`
+2. Use the CSS variables by referencing them in elements. For example,  `img {background: var(--main-color)}`
 
-2. We can then use these variables on other elements `img { var(--varName)}`
+3. Select/target `document.documentElement` and call the `style.setProperty()` method on the document, passing in the CSS variable you which to change and the new value - **`document.documentElement.style.setProperty()`** 
 
-3. We can access and update the CSS variables in JS by selecting the element they are defined and using the `setProperty` method. 
+   * `setProperty()` takes the **property name** and a new **value**. 
 
-   ```javascript
-   document.documentElement.style.setProperty(`--${varName}`, newValue)
-   ```
+     * ```css
+       setProperty(`--${main-color}`, 'green')
+       ```
+
 
 ## Key Takeaways
 
+* **CSS Variables**(`--varname: value`) - CSS varibles are used to store specific values to be reused throughout a document. For instance, `--main-color: red` or `--spacing: 10px`
+
+* The element/selector that holds the CSS variable defines the scope of that variable. **A common best practive is to define CSS variables on the `:root` pseudo-class**, so that it can be applied globally across your HTML document.
+
 * **CSS variables can be updated with JavaScript** - This means that we can update a CSS variable with JS and have that change affect the page.
-* SASS variables are defined at filetime which gets compiled and cannot be changed.
+* **SASS variables** are defined at filetime which gets compiled and cannot be changed.
 
 * `:root` - is the highest level element 
+
+* **`document.documentElement`** - returns the element that is the root element of the document
 
 * Calling `.querySelector()` or `.querySelectorAll()` will return a `nodeList`
 
@@ -45,9 +54,7 @@ This exercise involes updating CSS variables with JavaScript.
 
 * Short-circuit evaluation - we can use `||` to set a default value if the first operand is undefined or falsey.
 
-* `Arrow function vs function declaration/express` - The binding of `this` is different between the two. When we use arrow functions the binding of `this` is not the element that triggered the event. With a function declaration the `this` binding is the element that triggered the event. 
-
-  - [ ] Research into this. 
+* `Arrow function vs function declaration/express` - The binding of `this` is different between the two. When we use arrow functions the binding of `this` is not the element that triggered the event. With a function declaration the `this` binding is the element that triggered the event.  
 
 * `dataset` returns an object that contains all the data attributes on a specific element
 
@@ -59,37 +66,11 @@ This exercise involes updating CSS variables with JavaScript.
   document.documentElement.style.setProperty(`--${this.name}, this.value})
   ```
 
-   
+## Pseudocode
 
-### CSS Variables
+**Objective**: 
 
-CSS Variables are declared on elements using the `--` prefix. For example, they can be declared on the `:root` element. 
-
-```css
-:root {
-  --base: #ffc600;
-  --spacing: 10px;
-  --blur: 10px;
-}
-```
-
-
-
-We can then use the varaibles on another element with `var(--cssvar)` passing in the name of the variable. `var(--base)`
-
-```css
-img {
-	background: var(--base);
-	padding: var(--spacing);
-  filter: blur(var(--blur))
-}
-```
-
-
-
-## Solution
-
-### HTML Structure
+### HTML and CSS Structure
 
 ```html
   <div class="controls">
@@ -102,15 +83,84 @@ img {
     <label for="base">Base Color</label>
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 ```
 
-We have three variables(`spacing`, `blur` and `base`) that we want to select and update.
+```javascript
+:root {
+  --base: #ffc600;
+  --spacing: 10px;
+  --blur: 10px;
+  --width: 100px;
+  --border-radius: 0px;
+}
 
-Each variable is linked to an input with `blur` and `spacing` containing a `data-sizing` attribute. When we change the value of the input we want the value to update the variables. 
+img {
+  padding: var(--spacing);
+  background: var(--base);
+  filter: blur(var(--blur));
+  width: var(--width);
+  border-radius: var(--border-radius);
+}
+```
+
+* The page contains three `input` elements and one image.
+
+* The `spacing`, `blur` and `base` custom properties are defined on the `:root` element and the `img` element references these properties.
+
+* Each variable is linked to an input. `blur` and `spacing` contain the `data-sizing` attribute. When we change the value of the input we want the value to update the variables. 
+
+* The input elements have the following attributes: 
+
+  * `value` - represents the value we want our custom property to have
+
+  * `name` - links the input element to the custom property 
+
+  * `data-sizing` - provides additional information needed to update the value of CSS variables. For instance, properties that require suffixes such as `px`, `em` and `rem` etc. 
 
 
 
-1. Assign CSS variables to an element
+
+1. Select the inputs
+2. Listen for the `change` event on the inputs
+   1. Define a cb function
+      1. Store the `value` and `name` attribute of the `input` that triggered the change in a variable
+      2. Select `:root` element
+      3. Set the property of the CSS variable in `:root` with the `setProperty()` method, passing in the `name`,  `value` and `data-sizing` values/variables
+
+
+
+## Solution
+
+
+```javascript
+// Select all inputs
+const inputs = document.querySelectorAll('.controls input');
+
+// event handler
+const handleUpdate = ({currentTarget}) => {
+  // if the element that triggered the event has a data atrribute sizing store it in a variable
+  const suffix = currentTarget.dataset.sizing || '';
+  document.documentElement.style.setProperty(`--${currentTarget.name}`, `${currentTarget.value}${suffix}`);
+}
+
+// function handleUpdate() {
+//   const suffix = this.dataset.sizing || '';
+//   document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+// }
+
+// add eventListener to inputs
+inputs.forEach(input => {
+  input.addEventListener('change', handleUpdate)
+  input.addEventListener('mousemove', handleUpdate)
+})
+```
+
+
+
+### Solution Breakdown
+
+1. Assign CSS variables to the `:root` element
 
    ```css
    :root {
@@ -171,10 +221,4 @@ Each variable is linked to an input with `blur` and `spacing` containing a `data
        	document.documentElement.style.setProperty(`--${this.name}`, `${this.value}${suffix}`)
        }
        ```
-
-       
-
-   
-
-
 
