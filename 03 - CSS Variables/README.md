@@ -19,9 +19,9 @@ We achieve this by:
 
 ## Key Takeaways
 
-* **CSS Variables**(`--varname: value`) - CSS varibles are used to store specific values to be reused throughout a document. For instance, `--main-color: red` or `--spacing: 10px`
+* **CSS Variables**(`--varname: value`) - CSS variables are used to store specific values to be reused throughout a document. For instance, `--main-color: red` or `--spacing: 10px`
 
-* The element/selector that holds the CSS variable defines the scope of that variable. **A common best practive is to define CSS variables on the `:root` pseudo-class**, so that it can be applied globally across your HTML document.
+* The element/selector that holds the CSS variable defines the scope of that variable. **A common best practice is to define CSS variables on the `:root` pseudo-class**, so that it can be applied globally across your HTML document.
 
 * **CSS variables can be updated with JavaScript** - This means that we can update a CSS variable with JS and have that change affect the page.
 * **SASS variables** are defined at filetime which gets compiled and cannot be changed.
