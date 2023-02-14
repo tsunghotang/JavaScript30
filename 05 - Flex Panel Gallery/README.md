@@ -76,6 +76,31 @@ transition:
 
 The container element contains five `divs` with a class of `panel`. When clicked, the panel will open up to take up more space on the sceen. In addition, The first and last `<p>` elements, which are hidden, will transition onto the page.
 
+```css
+/* Toggle classes */
+.panel.open {
+  font-size: 40px;
+  flex: 5;
+}
+
+.panel.open-active > *:last-child {
+transform:translateY(0);
+}
+
+
+.panel > *:first-child {
+  transform: translateY(-100%);
+}
+
+.panel > *:last-child {
+  transform: translateY(100%);
+}
+```
+
+
+
+
+
 
 
 1. Style the panels 
