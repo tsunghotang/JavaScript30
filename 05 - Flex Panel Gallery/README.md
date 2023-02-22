@@ -99,10 +99,6 @@ transform:translateY(0);
 
 
 
-
-
-
-
 1. Style the panels 
    * Make the div with the class `panels` a `flex` container
    * Make each panel take up equal space within the page - `flex: 1`
