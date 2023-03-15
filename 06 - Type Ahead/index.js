@@ -84,5 +84,5 @@ function displayMatches() {
 const input = document.querySelector('.search')
 const suggestions = document.querySelector('.suggestions')
 
-input.addEventListener('change', displayMatches);
+// input.addEventListener('change', displayMatches);
 input.addEventListener('keyup', displayMatches)
