@@ -9,15 +9,10 @@ The goal is to populate suggestions based on the current value typed into the se
 We achieve this with:
 
 1. **Fetch API** - fetch a list of cities from an external source.
-2. **Event Listener** - Hook the search form to the `change` event 
-3. **Filter** - filter the cities data based on the current value of the search form  
-   1. We are filtering based on the state or city name
-
-4. JSON Data - We fetch this data and used it to populate our results based on the current input within the HTML form.
-5. 
-6. 
-
-
+2. Manipulating **JSON Data** - We fetch this data with the **fetch api** and save it to a variable
+3. **Event Listener** - Hook the search form to the `change` event 
+4. **Filter** - filter the JSON data(obj) based on the current value of the search form. The data contains both state and city name keys. 
+5. **Dom manipulation** - Create `li` based on the matches and insert them into The DOM
 
 ## Key takeaways
 
@@ -26,7 +21,7 @@ We achieve this with:
   * The data that comes back from the `fetch` call does not know what kind of data it is. Thus we need to convert the raw data from the response into the correct data type. `.then(response => { return response.json()})`
 
 
-  
+
 
 * `push()` - takes multiple arguments which are pushed into an array separately. `arr.push(1,2,3,) => [1,2,3]`.  This means we can use `spread` when we want to push all the elements of one array into another without iterating. `arr.push(...data)`
 
@@ -67,8 +62,6 @@ We achieve this with:
 
   
 
-
-
 ---
 
 
@@ -91,11 +84,13 @@ We have a form element that contains an `input` element and a `ul`element
 
 The `input` acts as a search form.
 
-The `ul` will act as a list for the suggestions.
+The `ul` will act as a list for the suggestions/matches. 
 
 
 
-We have a `JSON` file which contains the data we need to suggest cities based on what the user types. Everytime the user types, we filter the JSON  against the current value.
+### Data
+
+The `JSON` file contains the data we need to suggest cities based on what the user types. Everytime the user types, we filter the JSON  against the current value.
 
 
 
@@ -264,8 +259,6 @@ We Fetch the external city data using the **fetch api**. Everytime the use types
    ```
 
 
-
-
 ## Solution
 
 ```javascript
@@ -303,7 +296,6 @@ function findMatches(wordToMatch, cities) {
     return place.city.match(regex) || place.state.match(regex)
   });
 }
-
 
 function highlightMatch(input, regex, data) {
   return data.replace(regex, `<span class='hl'>${input}</span>`)
